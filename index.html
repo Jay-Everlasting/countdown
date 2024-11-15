@@ -1,130 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown Timer</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
 
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+
+        background-image: linear-gradient(to left bottom, #fbcaef, #d2f1e4);
+
+        font-size: 48px;
+        font-family: "B612", sans-serif;
+        font-weight: 400;
+        color: #003049;
+      }
+
+      .info__placement {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .small__gap {
+        gap: 10px;
+      }
+
+      @media (max-width: 1200px) {
         .container {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            
-            background-image: linear-gradient(to left bottom, #FBCAEF, #D2F1E4);
-            
-            font-size: 48px;
-            font-family: "B612", sans-serif;
-            font-weight: 400;
-            color: #003049;
+          font-size: 36px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          gap: 52px;
         }
 
         .info__placement {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+          flex-direction: column;
+          gap: 0;
         }
 
-        .hidden {
-            display: none;
+        .countdown {
+          font-size: 72px;
+          font-weight: 400;
+        }
+
+        .seen_informtion {
+          font-size: 28px;
         }
 
         .small__gap {
-            gap: 10px;
+          gap: 10px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .container {
+          gap: 36px;
         }
 
-        @media (max-width: 1200px) {
-            .container {
-                font-size: 36px;
-            }
+        .countdown {
+          font-size: 64px;
         }
 
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-                gap: 52px;
-            }
-
-            .info__placement {
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .countdown {
-                font-size: 72px;
-                font-weight: 400;
-            }
-
-            .seen_informtion {
-                font-size: 28px;
-            }
-
-            .small__gap {
-                gap: 10px;
-            }
+        .seen_informtion {
+          font-size: 20px;
         }
-        
-        @media (max-width: 700px) {
-            .container {
-                gap: 36px;
-            }
-
-            .countdown {
-                font-size: 64px;
-            }
-
-            .seen_informtion {
-                font-size: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container" id="container">        
-        <div class="info__placement">
-            <div id="countdown-day" class="countdown">LOADING</div>
-            <div class="seen_informtion">days</div>
-        </div>
-        
-        <div class="info__placement">
-            <div id="countdown-hours" class="countdown">THE</div>
-            <div class="seen_informtion">hours</div>
-        </div>
-        
-        <div class="info__placement">
-            <div id="countdown-min" class="countdown">COUNTDOWN</div>
-            <div class="seen_informtion">minutes</div>
-        </div>
-        
-        <div class="info__placement">
-            <div id="countdown-sec" class="countdown">NOW !</div>
-            <div class="seen_informtion">seconds</div>
-        </div>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="info__placement">
+        <div id="countdown-day" class="countdown">LOADING</div>
+        <div class="seen_informtion">days</div>
+      </div>
+
+      <div class="info__placement">
+        <div id="countdown-hours" class="countdown">THE</div>
+        <div class="seen_informtion">hours</div>
+      </div>
+
+      <div class="info__placement">
+        <div id="countdown-min" class="countdown">COUNTDOWN</div>
+        <div class="seen_informtion">minutes</div>
+      </div>
+
+      <div class="info__placement">
+        <div id="countdown-sec" class="countdown">NOW !</div>
+        <div class="seen_informtion">seconds</div>
+      </div>
     </div>
 
     <script>
-        // Set the target date
-        const targetDate = new Date("December 22, 2024 10:25:00").getTime();
+      // Set the target date in UTC
+      const targetDate = new Date("2024-12-22T08:25:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
 
-        // Update the countdown every second
-        const countdownInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const timeLeft = targetDate - now;
+      // Update the countdown every second
+      const countdownInterval = setInterval(function () {
+        const now = new Date().getTime();
+        const timeLeft = targetDate - now;
 
-            if (timeLeft <= 0) {
-                document.getElementById("container").innerHTML = `
+        if (timeLeft <= 0) {
+          document.getElementById("container").innerHTML = `
                     <p>🌍</p>
                     <p>On</p>
                     <p>✈️</p>
@@ -133,57 +136,64 @@
                     <p>way</p>
                     <p>🌏</p>
                 `;
-                document.querySelector('#container').classList.add('small__gap');
-                clearInterval(countdownInterval);
-                return;
-            }
+          document.querySelector("#container").classList.add("small__gap");
+          clearInterval(countdownInterval);
+          return;
+        }
 
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        // Calculate days, hours, minutes, and seconds
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            if (days != 0) {
-                document.querySelector('#countdown-day').innerText = `${days}`;
-            } else {
-                document.querySelector('#countdown-day').innerText = null;
-                document.querySelectorAll('.info__placement')[0].classList.add('hidden');
-            }
+        if (days != 0) {
+          document.querySelector("#countdown-day").innerText = `${days}`;
+        } else {
+          document.querySelector("#countdown-day").innerText = null;
+          document
+            .querySelectorAll(".info__placement")[0]
+            .classList.add("hidden");
+        }
 
-            if (hours != 0) {
-                document.querySelector('#countdown-hours').innerText = `${hours}`;
-            } else {
-                if (days == 0 && hours == 0) {
-                    document.querySelector('#countdown-hours').innerText = null;
-                    document.querySelectorAll('.info__placement')[1].classList.add('hidden');
-                } else {
-                    document.querySelector('#countdown-hours').innerText = `0`;
-                }
-            }
+        if (hours != 0) {
+          document.querySelector("#countdown-hours").innerText = `${hours}`;
+        } else {
+          if (days == 0 && hours == 0) {
+            document.querySelector("#countdown-hours").innerText = null;
+            document
+              .querySelectorAll(".info__placement")[1]
+              .classList.add("hidden");
+          } else {
+            document.querySelector("#countdown-hours").innerText = `0`;
+          }
+        }
 
-            if (minutes != 0) {
-                document.querySelector('#countdown-min').innerText = `${minutes}`;
-            } else {
-                if (days == 0 && hours == 0 && minutes == 0) {
-                    document.querySelector('#countdown-min').innerText = null;
-                    document.querySelectorAll('.info__placement')[2].classList.add('hidden');
-                } else {
-                    document.querySelector('#countdown-min').innerText = `0`;
-                }
-            }
+        if (minutes != 0) {
+          document.querySelector("#countdown-min").innerText = `${minutes}`;
+        } else {
+          if (days == 0 && hours == 0 && minutes == 0) {
+            document.querySelector("#countdown-min").innerText = null;
+            document
+              .querySelectorAll(".info__placement")[2]
+              .classList.add("hidden");
+          } else {
+            document.querySelector("#countdown-min").innerText = `0`;
+          }
+        }
 
-            if (seconds != 0) {
-                if (seconds < 10) {
-                    document.querySelector('#countdown-sec').innerText = `0${seconds}`;
-                } else {
-                    document.querySelector('#countdown-sec').innerText = `${seconds}`;
-                }
-            } else {
-                document.querySelector('#countdown-sec').innerText = `00`;
-            }
- 
-        }, 1000);
+        if (seconds != 0) {
+          if (seconds < 10) {
+            document.querySelector("#countdown-sec").innerText = `0${seconds}`;
+          } else {
+            document.querySelector("#countdown-sec").innerText = `${seconds}`;
+          }
+        } else {
+          document.querySelector("#countdown-sec").innerText = `00`;
+        }
+      }, 1000);
     </script>
-</body>
+  </body>
 </html>
