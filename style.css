@@ -1,0 +1,134 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  background-image: linear-gradient(to left bottom, #fbcaef, #d2f1e4);
+
+  font-size: 48px;
+  font-family: "B612", sans-serif;
+  font-weight: 400;
+  color: #003049;
+}
+
+/*** ************************************************************ ***/
+/***                          Flight Watch                        ***/
+/*** ************************************************************ ***/
+.flight_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.info__placement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.small__gap {
+  gap: 10px;
+}
+
+/*** ************************************************************ ***/
+/***                         Meeting Watch                        ***/
+/*** ************************************************************ ***/
+.meeting_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  font-size: 20px;
+}
+
+.info__placement-meeting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.emoji-meet {
+  font-size: 48px;
+}
+
+.countdown-day-meeting {
+}
+
+.countdown-meeting {
+}
+
+.seen_informtion-meeting {
+}
+
+.countdown-hours-meeting {
+}
+
+.countdown-min-meeting {
+}
+
+.countdown-sec-meeting {
+}
+
+/*** ************************************************************ ***/
+/***                         MEDIA QUERIES                        ***/
+/*** ************************************************************ ***/
+@media (max-width: 1200px) {
+  .container {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .flight_count {
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  .info__placement {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .countdown {
+    font-size: 72px;
+    font-weight: 400;
+  }
+
+  .seen_informtion {
+    font-size: 28px;
+  }
+
+  .small__gap {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .flight_count {
+    gap: 36px;
+  }
+
+  .countdown {
+    font-size: 64px;
+  }
+
+  .seen_informtion {
+    font-size: 20px;
+  }
+}
