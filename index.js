@@ -114,7 +114,7 @@ const calculateLeftTime = function (timeLeft, flight = true) {
 
 const setTextVisible = function () {
   document.querySelectorAll(".emoji")[0].innerText = "✈️";
-  document.querySelectorAll(".emoji")[1].innerText = "👨‍❤️‍💋‍👩";
+  document.querySelectorAll(".emoji")[1].innerText = "🧑🏼‍❤️‍💋‍👩🏽";
   document.querySelectorAll(".seen_informtion")[0].innerText = "days";
   document.querySelectorAll(".seen_informtion")[1].innerText = "hours";
   document.querySelectorAll(".seen_informtion")[2].innerText = "minutes";
