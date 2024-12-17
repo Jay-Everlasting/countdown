@@ -20,7 +20,7 @@
 }
 
 /*** ************************************************************ ***/
-/***                          Flight Watch                        ***/
+/***                      Flight Countdown                        ***/
 /*** ************************************************************ ***/
 .flight_count {
   display: flex;
@@ -45,7 +45,7 @@
 }
 
 /*** ************************************************************ ***/
-/***                         Meeting Watch                        ***/
+/***                      Meeting Contdown                        ***/
 /*** ************************************************************ ***/
 .meeting_count {
   display: flex;
@@ -64,7 +64,7 @@
 }
 
 .emoji-meet {
-  font-size: 48px;
+  font-size: 42px;
 }
 
 .countdown-day-meeting {
@@ -89,7 +89,15 @@
 /***                         MEDIA QUERIES                        ***/
 /*** ************************************************************ ***/
 @media (max-width: 1200px) {
-  .container {
+  .flight_count {
+    font-size: 36px;
+  }
+
+  .meeting_count {
+    font-size: 18px;
+  }
+
+  .emoji-meet {
     font-size: 36px;
   }
 }
@@ -117,6 +125,24 @@
   .small__gap {
     gap: 10px;
   }
+
+  .meeting_count {
+    margin-top: 28px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: start;
+    align-items: start;
+    gap: 10px;
+    column-gap: 26px;
+  }
+
+  .emoji-meet {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    align-self: center;
+    justify-self: center;
+  }
 }
 
 @media (max-width: 700px) {
@@ -125,7 +151,7 @@
   }
 
   .countdown {
-    font-size: 64px;
+    font-size: 56px;
   }
 
   .seen_informtion {

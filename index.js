@@ -1,3 +1,5 @@
+"use strict";
+
 // Set the target date in UTC
 const targetDate = new Date("2024-12-22T08:25:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
 const meetingDate = new Date("December 23, 2024 20:45:00 GMT+10").getTime();
@@ -8,8 +10,9 @@ const countdownInterval = setInterval(function () {
   const timeLeft = targetDate - now;
   const timeLeftMeet = meetingDate - now;
 
+  // 380352614
   if (timeLeft <= 0) {
-    document.getElementById("container").innerHTML = `
+    document.getElementById("flight_count").innerHTML = `
               <p>🌍</p>
               <p>On</p>
               <p>✈️</p>
@@ -18,12 +21,10 @@ const countdownInterval = setInterval(function () {
               <p>way</p>
               <p>🌏</p>
           `;
-    document.querySelector("#container").classList.add("small__gap");
-    clearInterval(countdownInterval);
-    return;
+  } else {
+    calculateLeftTime(timeLeft);
   }
 
-  calculateLeftTime(timeLeft);
   calculateLeftTime(timeLeftMeet, false);
 
   setTextVisible();
@@ -113,12 +114,14 @@ const calculateLeftTime = function (timeLeft, flight = true) {
 };
 
 const setTextVisible = function () {
-  document.querySelectorAll(".emoji")[0].innerText = "✈️";
-  document.querySelectorAll(".emoji")[1].innerText = "🧑🏼‍❤️‍💋‍👩🏽";
-  document.querySelectorAll(".seen_informtion")[0].innerText = "days";
-  document.querySelectorAll(".seen_informtion")[1].innerText = "hours";
-  document.querySelectorAll(".seen_informtion")[2].innerText = "minutes";
-  document.querySelectorAll(".seen_informtion")[3].innerText = "seconds";
+  if (document.querySelector("#emoji-plane")) {
+    document.querySelector("#emoji-plane").innerText = "✈️";
+    document.querySelectorAll(".seen_informtion")[0].innerText = "days";
+    document.querySelectorAll(".seen_informtion")[1].innerText = "hours";
+    document.querySelectorAll(".seen_informtion")[2].innerText = "minutes";
+    document.querySelectorAll(".seen_informtion")[3].innerText = "seconds";
+  }
+  document.querySelector("#emoji-meet").innerText = "🧑🏼‍❤️‍💋‍👩🏽";
   document.querySelectorAll(".seen_informtion-meeting")[0].innerText = "days";
   document.querySelectorAll(".seen_informtion-meeting")[1].innerText = "hours";
   document.querySelectorAll(".seen_informtion-meeting")[2].innerText =
