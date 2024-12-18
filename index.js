@@ -4,7 +4,7 @@
 const targetDate = new Date("2024-12-22T08:25:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
 // const targetDate = new Date("2024-12-18T22:30:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
 // const meetingDate = new Date("December 23, 2024 20:45:00 GMT+10").getTime(); // 20:45 Bristbane time
-const meetingDate = new Date("December 18, 2024 10:10:00 GMT+10").getTime();
+const meetingDate = new Date("December 18, 2024 14:55:00 GMT+10").getTime();
 
 // Update the countdown every second
 const countdownInterval = setInterval(function () {
@@ -12,10 +12,14 @@ const countdownInterval = setInterval(function () {
   const timeLeft = targetDate - now;
   const timeLeftMeet = meetingDate - now;
 
-  console.log(timeLeftMeet);
-
   // 380352614
-  if (timeLeft <= 0) {
+  if (timeLeft <= 0 && timeLeftMeet <= 0) {
+    document.getElementById("container").innerHTML = "🧑🏼‍❤️‍💋‍👩🏽";
+    clearTimeout(countdownInterval);
+    return;
+  }
+
+  if (timeLeft <= 380352614) {
     document.getElementById("flight_count").innerHTML = `
               <p>🌍</p>
               <p>On</p>
@@ -25,6 +29,9 @@ const countdownInterval = setInterval(function () {
               <p>way</p>
               <p>🌏</p>
           `;
+    document.querySelector(".emoji-meet").classList.add("hidden");
+    document.querySelector("#meeting").classList.remove("meeting_count");
+    document.querySelector("#meeting").classList.add("meeting_count--less");
   } else {
     calculateLeftTime(timeLeft);
   }

@@ -109,15 +109,14 @@
   }
 
   .meeting_count {
-    margin-top: 28px;
-
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     justify-items: start;
     align-items: start;
     gap: 10px;
     row-gap: 26px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
   }
 
   .emoji-meet {
@@ -125,6 +124,42 @@
     grid-column: 1;
     align-self: center;
     justify-self: center;
+  }
+
+  .meeting_count:has(.emoji-meet:nth-last-child(3)) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .meeting_count:has(.emoji-meet:nth-last-child(3)) .emoji-meet {
+    grid-row: auto;
+  }
+
+  .meeting_count:has(.emoji-meet:nth-last-child(2)) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .meeting_count:has(.emoji-meet:nth-last-child(2)) .emoji-meet {
+    grid-row: auto;
+  }
+
+  .meeting_count:has(.emoji-meet:only-child) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .meeting_count:has(.emoji-meet:only-child) .emoji-meet {
+    grid-row: auto;
+  }
+
+  /* Updated style for countdown when flight countdown is 0 */
+  .meeting_count--less {
+    margin-top: 30px;
+
+    display: flex;
+    font-size: 28px;
+    gap: 20px;
   }
 }
 
