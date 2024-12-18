@@ -2,13 +2,17 @@
 
 // Set the target date in UTC
 const targetDate = new Date("2024-12-22T08:25:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
-const meetingDate = new Date("December 23, 2024 20:45:00 GMT+10").getTime();
+// const targetDate = new Date("2024-12-18T22:30:00Z").getTime(); // 10:25 AM Amsterdam time converted to UTC
+// const meetingDate = new Date("December 23, 2024 20:45:00 GMT+10").getTime(); // 20:45 Bristbane time
+const meetingDate = new Date("December 18, 2024 10:10:00 GMT+10").getTime();
 
 // Update the countdown every second
 const countdownInterval = setInterval(function () {
   const now = new Date().getTime();
   const timeLeft = targetDate - now;
   const timeLeftMeet = meetingDate - now;
+
+  console.log(timeLeftMeet);
 
   // 380352614
   if (timeLeft <= 0) {
@@ -39,7 +43,7 @@ const calculateLeftTime = function (timeLeft, flight = true) {
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-  if (days != 0) {
+  if (days > 0) {
     document.querySelector(
       `${flight ? "#countdown-day" : "#countdown-day-meeting"}`
     ).innerText = `${days}`;
@@ -49,23 +53,23 @@ const calculateLeftTime = function (timeLeft, flight = true) {
     ).innerText = null;
     document
       .querySelectorAll(
-        `${flight ? "info__placement" : "info__placement-meeting"}`
+        `${flight ? ".info__placement" : ".info__placement-meeting"}`
       )[0]
       .classList.add("hidden");
   }
 
-  if (hours != 0) {
+  if (hours > 0) {
     document.querySelector(
       `${flight ? "#countdown-hours" : "#countdown-hours-meeting"}`
     ).innerText = `${hours}`;
   } else {
-    if (days == 0 && hours == 0) {
+    if (days <= 0 && hours <= 0) {
       document.querySelector(
         `${flight ? "#countdown-hours" : "#countdown-hours-meeting"}`
       ).innerText = null;
       document
         .querySelectorAll(
-          `${flight ? "info__placement" : "info__placement-meeting"}`
+          `${flight ? ".info__placement" : ".info__placement-meeting"}`
         )[1]
         .classList.add("hidden");
     } else {
@@ -75,18 +79,18 @@ const calculateLeftTime = function (timeLeft, flight = true) {
     }
   }
 
-  if (minutes != 0) {
+  if (minutes > 0) {
     document.querySelector(
       `${flight ? "#countdown-min" : "#countdown-min-meeting"}`
     ).innerText = `${minutes}`;
   } else {
-    if (days == 0 && hours == 0 && minutes == 0) {
+    if (days <= 0 && hours <= 0 && minutes <= 0) {
       document.querySelector(
         `${flight ? "#countdown-min" : "#countdown-min-meeting"}`
       ).innerText = null;
       document
         .querySelectorAll(
-          `${flight ? "info__placement" : "info__placement-meeting"}`
+          `${flight ? ".info__placement" : ".info__placement-meeting"}`
         )[2]
         .classList.add("hidden");
     } else {
@@ -96,7 +100,7 @@ const calculateLeftTime = function (timeLeft, flight = true) {
     }
   }
 
-  if (seconds != 0) {
+  if (seconds >= 0) {
     if (seconds < 10) {
       document.querySelector(
         `${flight ? "#countdown-sec" : "#countdown-sec-meeting"}`
@@ -107,9 +111,11 @@ const calculateLeftTime = function (timeLeft, flight = true) {
       ).innerText = `${seconds}`;
     }
   } else {
-    document.querySelector(
-      `${flight ? "#countdown-sec" : "#countdown-sec-meeting"}`
-    ).innerText = `00`;
+    document
+      .querySelectorAll(
+        `${flight ? ".info__placement" : ".info__placement-meeting"}`
+      )[3]
+      .classList.add("hidden");
   }
 };
 
@@ -118,14 +124,12 @@ const setTextVisible = function () {
     document.querySelector("#emoji-plane").innerText = "✈️";
     document.querySelectorAll(".seen_informtion")[0].innerText = "days";
     document.querySelectorAll(".seen_informtion")[1].innerText = "hours";
-    document.querySelectorAll(".seen_informtion")[2].innerText = "minutes";
-    document.querySelectorAll(".seen_informtion")[3].innerText = "seconds";
+    document.querySelectorAll(".seen_informtion")[2].innerText = "min";
+    document.querySelectorAll(".seen_informtion")[3].innerText = "sec";
   }
   document.querySelector("#emoji-meet").innerText = "🧑🏼‍❤️‍💋‍👩🏽";
   document.querySelectorAll(".seen_informtion-meeting")[0].innerText = "days";
   document.querySelectorAll(".seen_informtion-meeting")[1].innerText = "hours";
-  document.querySelectorAll(".seen_informtion-meeting")[2].innerText =
-    "minutes";
-  document.querySelectorAll(".seen_informtion-meeting")[3].innerText =
-    "seconds";
+  document.querySelectorAll(".seen_informtion-meeting")[2].innerText = "min";
+  document.querySelectorAll(".seen_informtion-meeting")[3].innerText = "sec";
 };
